@@ -10,8 +10,58 @@
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
+        <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="flex flex-col min-h-screen bg-gray-100">
+        <!-- Header -->
+        <header class="bg-white shadow-md">
+            <nav class="container mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <a href="{{ path('app_home') }}" class="text-xl font-bold text-gray-800">
+                            Leave Request
+                        </a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="{{ path('app_home') }}" class="text-gray-600 hover:text-gray-800">Home</a>
+                        <a href="{{ path('app_leave_request') }}" class="text-gray-600 hover:text-gray-800">My Requests</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Messages -->
+        {% for flashMessage in app.flashes('success') %}
+            <div class="bg-green-500 text-white px-6 py-4 border-0 rounded relative mb-4">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.flashes('danger') %}
+            <div class="bg-red-500 text-white px-6 py-4 border-0 rounded relative mb-4">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-6 py-8">
+            {% block body %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="text-sm">
+                        {{ "now"|date("Y") }} Leave Request System. All rights reserved.
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white text-sm">Privacy Policy</a>
+                        <a href="#" class="text-gray-300 hover:text-white text-sm">Terms of Service</a>
+                        <a href="#" class="text-gray-300 hover:text-white text-sm">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </body>
 </html>

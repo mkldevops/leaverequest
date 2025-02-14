@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LeaveRequestController!{% endblock %}
+
+{% block body %}
+    <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">My Leave Requests</h1>
+        
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead>
+                <tr>
+                    <th class="px-6 py-3 bg-gray-200 text-left text-sm font-semibold text-gray-700">Date début</th>
+                    <th class="px-6 py-3 bg-gray-200 text-left text-sm font-semibold text-gray-700">Date fin</th>
+                    <th class="px-6 py-3 bg-gray-200 text-left text-sm font-semibold text-gray-700">Reason</th>
+                    <th class="px-6 py-3 bg-gray-200 text-left text-sm font-semibold text-gray-700">Status</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                {% for leave_request in leave_requests %}
+                    <tr>
+                        <td class="px-6 py-4 text-sm text-gray-800">{{ leave_request.startDate|date('d/m/Y') }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-800">{{ leave_request.endDate|date('d/m/Y') }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-800">{{ leave_request.reason }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-800">{{ leave_request.status.value }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
